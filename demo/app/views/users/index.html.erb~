@@ -1,0 +1,12 @@
+<h1>Listing Users</h1>
+
+<table border=5>
+<% @users.each do|user| %>
+<tr><td><%= user.name %></td><td>  <%= link_to 'Show', user_path(user)%>
+ </td><td>  <%= link_to 'Edit', edit_user_path(user)%></td><td>
+   <%= link_to 'Destroy', user_path(user),:method => :delete %></td><td>
+<%= link_to 'Create post', new_user_post_path(user) %></td></tr>
+<%end%>
+ </table>
+<%= link_to 'New User', new_user_path %>
+

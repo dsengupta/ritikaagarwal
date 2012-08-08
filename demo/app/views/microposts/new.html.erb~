@@ -1,0 +1,12 @@
+<h1>New Post</h1>
+<%=form_for (@user) do|user| %>
+<%=user.label :content,"Content" %>
+<%=user.text_field :content %>
+<br>
+<%=user.label :user_id,"User" %>
+<%=user.text_field :user_id %>
+<br>
+<%=user.submit "Create User" %>
+<%end%><br>
+<br><br>
+

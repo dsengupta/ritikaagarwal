@@ -1,0 +1,7 @@
+<h1>Post#show</h1>
+<table border =4>
+<tr><td><label>content :</label> </td><td><%= @user.content %></td></tr>
+<tr><td><label>user id: </label></td> <td>
+<%= @user.user_id %></td></tr></table>
+<br>
+

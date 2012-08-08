@@ -1,0 +1,9 @@
+<h1>users#show</h1>
+<table border =4>
+<tr><td><label>name :</label> </td><td><%= @user.name %></td></tr>
+<tr><td><label>email id: </label></td> <td>
+<%= @user.email %></td></tr></table>
+<%end%>
+<br><br>
+
+<%= link_to 'back' ,users_path %>

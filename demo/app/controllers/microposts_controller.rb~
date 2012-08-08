@@ -1,0 +1,29 @@
+class MicropostsController < ApplicationController
+def index 
+@users=Micropost.all
+end
+def show
+@user=Micropost.find(params[:id])
+end
+def new
+@user=Micropost.new
+end
+
+def create 
+@user=Micropost.create!(params[:user])
+end
+
+def destroy
+Micropost.find(params[:id]).destroy
+end 
+
+def edit 
+@user= Micropost.find(params[:id])
+end
+
+def update
+@user = Micropost.find(params[:id])
+@user.update_attributes(params[:user])
+end
+end
+

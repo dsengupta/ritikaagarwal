@@ -1,0 +1,11 @@
+<h1>Editing Post</h1>
+<%=form_for(@user) do|user| %><table>
+<tr><td><%=user.label :content %></td>
+<td><%=user.text_field :content %></td>
+</tr><tr>
+<td><%=user.label :user_id %></td>
+<td><%=user.text_field :user_id %></td>
+</tr></table>
+<%=user.submit "Update User" %>
+<%end%>
+<br>

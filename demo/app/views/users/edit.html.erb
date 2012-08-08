@@ -1,0 +1,13 @@
+<% provide(:title, 'edit') %><h1>Editing User</h1>
+<%=form_for(@user) do|user| %><table>
+<tr><td><%=user.label :name %></td>
+<td><%=user.text_field :name %></td>
+</tr><tr>
+<td><%=user.label :email %></td>
+<td><%=user.text_field :email %></td>
+</tr></table>
+<%=user.submit "Update User" %>
+<%end%>
+<br>
+<%= link_to 'Show',user_path(@user) %>
+<%= link_to 'Back',users_path %>
