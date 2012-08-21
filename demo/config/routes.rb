@@ -1,11 +1,18 @@
 Demo::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
-
- 
-   resources:users
-   resources:microposts
- 
+  get "users/new"
+  
+get "static_pages/about"
+get "static_pages/contact" 
+   resources:users do
+	member do
+	get :following,:followers
+	end
+	end
+   resources:sessions,:only =>[:new,:create,:destroy]
+    resources :microposts, :only=> [:create, :destroy]
+ resources :relationships, :only=> [:create, :destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -64,4 +71,9 @@ Demo::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 match "/home", :to => 'static_pages#home'
 match "/help", :to => 'static_pages#help'
+match "/help", :to => 'static_pages#about'
+match "/help", :to => 'static_pages#contact'
+match '/signup', :to=> 'users#new'
+match '/signin', :to=> 'sessions#new'
+match '/signout', :to=> 'sessions#destroy', :via=> :delete
 end

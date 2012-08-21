@@ -1,15 +1,68 @@
 class User < ActiveRecord::Base
+<<<<<<< HEAD
    attr_accessible :name, :email,:password,:password_confirmation
 has_secure_password
+has_many:microposts,:dependent=>:destroy
+has_many:relationships,:foreign_key =>"follower_id",:dependent=>:destroy
+has_many:followed_users,:through=>:relationships,:source=>:followed
+has_many:reverse_relationships, :foreign_key=>"followed_id",
+                                   :class_name=>"Relationship",
+                                   :dependent=>:destroy
+  has_many:followers, :through=>:reverse_relationships, :source=>:follower
+=======
+  attr_accessible :name, :email,:password,:password_confirmation
+  has_secure_password
+  has_many:microposts,:dependent=>:destroy
+>>>>>>> 06a0fda27c98ed5ef92e9b30dc910c0c5b456ef3
 
-	has_many :microposts
+
+  before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
 
 
-validates :name, :presence =>true, :length => {:maximum =>10}
-VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :name, :presence =>true, :length => {:maximum =>10}
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence=> true, :format=> { :with=>VALID_EMAIL_REGEX },
-:uniqueness=> true
-validates :password, :presence=>true, :length=> { :minimum=> 6 }
-validates :password_confirmation,:presence =>true
-before_save { |user| user.email = email.downcase }
+  :uniqueness=> true
+
+  validates :password, :presence=>true, :length=> { :minimum=> 6 }
+  validates :password_confirmation,:presence =>true
+
+<<<<<<< HEAD
+    
+	def create_remember_token
+      	self.remember_token = SecureRandom.hex
+    	end
+
+	def feed
+        Micropost.from_users_followed_by(self)
+  	end
+ 	def following?(other_user)
+    	relationships.find_by_followed_id(other_user.id)
+  	end
+
+  	def follow!(other_user)
+    	relationships.create!(:followed_id=>other_user.id)
+  	end
+
+  	def unfollow!(other_user)
+    	relationships.find_by_followed_id(other_user.id).destroy
+  	end
 end
+=======
+
+  def create_remember_token
+    self.remember_token = SecureRandom.hex
+  end
+
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+end
+
+
+
+
+>>>>>>> 06a0fda27c98ed5ef92e9b30dc910c0c5b456ef3
