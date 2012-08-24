@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-<<<<<<< HEAD
+
    attr_accessible :name, :email,:password,:password_confirmation
 has_secure_password
 has_many:microposts,:dependent=>:destroy
@@ -9,11 +9,7 @@ has_many:reverse_relationships, :foreign_key=>"followed_id",
                                    :class_name=>"Relationship",
                                    :dependent=>:destroy
   has_many:followers, :through=>:reverse_relationships, :source=>:follower
-=======
-  attr_accessible :name, :email,:password,:password_confirmation
-  has_secure_password
-  has_many:microposts,:dependent=>:destroy
->>>>>>> 06a0fda27c98ed5ef92e9b30dc910c0c5b456ef3
+
 
 
   before_save { |user| user.email = email.downcase }
@@ -30,7 +26,6 @@ has_many:reverse_relationships, :foreign_key=>"followed_id",
   validates :password, :presence=>true, :length=> { :minimum=> 6 }
   validates :password_confirmation,:presence =>true
 
-<<<<<<< HEAD
     
 	def create_remember_token
       	self.remember_token = SecureRandom.hex
@@ -51,18 +46,4 @@ has_many:reverse_relationships, :foreign_key=>"followed_id",
     	relationships.find_by_followed_id(other_user.id).destroy
   	end
 end
-=======
 
-  def create_remember_token
-    self.remember_token = SecureRandom.hex
-  end
-
-  def feed
-    Micropost.where("user_id = ?", id)
-  end
-end
-
-
-
-
->>>>>>> 06a0fda27c98ed5ef92e9b30dc910c0c5b456ef3

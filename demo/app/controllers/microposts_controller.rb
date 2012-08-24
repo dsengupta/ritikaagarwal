@@ -1,8 +1,5 @@
 class MicropostsController < ApplicationController
-<<<<<<< HEAD
-=======
 
->>>>>>> 06a0fda27c98ed5ef92e9b30dc910c0c5b456ef3
   before_filter :signed_in_user, :only=> [:create, :destroy]
   before_filter :correct_user, :only=>:destroy
 
